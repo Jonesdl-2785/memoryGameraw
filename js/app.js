@@ -164,3 +164,4 @@ function hideStar () {
   }
 }
 hideStar();
+hideStar();
