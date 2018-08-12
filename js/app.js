@@ -142,4 +142,4 @@ function hideStar () {
   }
 }
 hideStar();
-hideStar();
+// hideStar();
