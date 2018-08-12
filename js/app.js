@@ -3,57 +3,34 @@ const cardImages = ["gem.png", "paper-plane.png", "bolt.png",
                   "anchor.png"];
 let board = document.getElementById('gameBoard');
 let messageTop = document.getElementById('message');
-let cardArray = cardImages.concat(cardImages);
-let cardsClicked = 0;
-let previousCard = -1;
-let timer = '';
-let score = 100;
 let msgText = '';
-let seconds = 0;
-let milsecs = 0;
-let mins = 0;
-let hours = 0;
-let time;
-let t;
-let scorePanel = 0;
-let moves = 0;
+let cardArray = cardImages.concat(cardImages);
+let cardsClicked = 0, previousCard = -1, timer = '', score = 100, message = '', seconds = 0, milsecs = 0, mins = 0, hours = 0, time, t, scorePanel = 0, moves = 0;
 let gmtime = document.getElementById('gmtime');
 let btnText = document.getElementById('gameConsole');
 let restartGame = document.getElementById('gameConsole').addEventListener('click', beginGame);
 toggleArr = new Array();
-
 // Start game
 beginGame();
-function beginGame(){
-  clearInterval(timer);
-  clearTimeout(t);
-  timerG();
-  seconds = 0;
-  milsecs = 0;
-  minutes = 0;
-  moves = 0;
-  hours = 0;
-  score = 100;
+function beginGame() {
+    clearInterval(timer);
+    // clearTimeout(t);
+    timerG();
+    seconds = 0, milsecs = 0, minutes = 0, moves = 0, hours = 0, score = 100;
     // clear gameboard
     shuffleArray(cardArray);
     score = 0;
     board.innerHTML = "";
     // create new gameboard
     btnText.innerHTML = "Restart Game";
-    msgText = "Choose card to begin Game";
-    for (let i = 0; i <= ((cardArray.length)-1); i++) {
-//       showImage(i);
-      board.innerHTML += '<div class="col-md-3 col-xs-4 gamecard"><img id="cards'+i+'" src="img/heart.png" onclick="clickCard(\''+cardArray[i]+'\',\''+i+'\',this); return false;" class="shuffleimage"></div>';
+    messageText("Choose card to begin Game");
+    for (let i = 0; i <= ((cardArray.length) - 1); i++) {
+      board.innerHTML += '<div class="col-md-3 col-xs-4 gamecard"><img id="cards'+ i +'" src="img/heart.png" onclick="clickCard(\'' + cardArray[i] + '\',\'' + i + '\',this);return false;" class="shuffleimage"></div>';
     }
 }
-
-// function showImage(i){
-//
-// }
-
 function clickCard(a,b,c) {
   // console.log(c);
-  previousCard = b;
+  // previousCard = b;
   if(cardsClicked < 2 && previousCard != b){
     toggleArr[cardsClicked] = cardArray[b];
     toggleArr[(cardsClicked + 2)] = c. id;
@@ -61,9 +38,9 @@ function clickCard(a,b,c) {
     c.src = 'img/' + cardArray[b];
       if(cardsClicked  == 2){
         if(toggleArr[0] == toggleArr[1]){
-          msgText('It\'s a MATCH');
+          messageText('It\'s a MATCH');
             choosenewCards();
-            score = score + 1;
+            score++;
             // Check if Game is over
             if(cardImages <= score) {
                 console.log("GAME OVER");
@@ -130,6 +107,7 @@ function choosenewCards(){
 }
 
 function resetCard(){
+  console.log(toggleArr)
   if(toggleArr[2]){
     document.getElementById(toggleArr[2]).src = "img/heart.png";
   }
